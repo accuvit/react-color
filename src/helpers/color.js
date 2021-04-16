@@ -25,8 +25,11 @@ export const simpleCheckForValidColor = (data) => {
 export const toState = (data, oldHue) => {
   const color = data.hex ? tinycolor(data.hex) : tinycolor(data)
   const hsl = color.toHsl()
+  const hslString = color.toHslString()
   const hsv = color.toHsv()
+  const hsvString = color.toHsvString()
   const rgb = color.toRgb()
+  const rgbString = color.toRgbString()
   const hex = color.toHex()
   if (hsl.s === 0) {
     hsl.h = oldHue || 0
@@ -36,9 +39,12 @@ export const toState = (data, oldHue) => {
 
   return {
     hsl,
+    hslString,
     hex: transparent ? 'transparent' : `#${ hex }`,
     rgb,
+    rgbString,
     hsv,
+    hsvString,
     oldHue: data.h || oldHue || hsl.h,
     source: data.source,
   }
